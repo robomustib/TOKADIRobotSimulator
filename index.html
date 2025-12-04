@@ -233,7 +233,6 @@
     let currentDirection = 0;
     let currentLevel = 1;
 
-    // UPDATED: Local paths for items
     const items = {
         level1: [
             { id: 'battery1', icon: 'assets/batterie.svg', collected: false },
@@ -260,16 +259,11 @@
     const backgroundMusic = document.getElementById('backgroundMusic');
     const musicButton = document.getElementById('musicButton');
     let currentX, currentY;
-    
-    // Autoplay policy fix: browser might block autoplay
-    // Removed strict autoplay from JS start to avoid console errors until interaction
-    
+        
     resetGame();
-    // Attempt play, but catch error if user hasn't interacted yet
     const playPromise = backgroundMusic.play();
     if (playPromise !== undefined) {
         playPromise.catch(error => {
-            // Auto-play was prevented
             musicButton.textContent = '♪ | ⭘';
         });
     }
@@ -289,7 +283,6 @@
         currentX = Math.floor(Math.random() * 10);
         currentY = Math.floor(Math.random() * 10);
         const gameArea = document.getElementById('gameArea');
-        // UPDATED: Local path for background
         gameArea.style.backgroundImage = `url('assets/level${currentLevel}bg.png')`;
         const levelItems = items[`level${currentLevel}`];
         levelItems.forEach((item) => {
